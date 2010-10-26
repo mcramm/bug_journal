@@ -11,3 +11,15 @@ Feature: Projects
         When I press 'Save'
         Then I should see 'Pizza'
         And I should see 'Saucy'
+    
+    Scenario: View Project List
+        Given I have 1 project
+        When I am on the home page
+        Then I should see 'Pizza'
+
+    Scenario: View Project
+        Given I have 1 project
+        And I am on the home page
+        When I follow 'Pizza'
+        Then I should see 'Pizza'
+        And I should see 'Saucy'

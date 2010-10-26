@@ -14,3 +14,7 @@ end
 Then /^I should see '(.*)'$/ do |text|
    body.should match text.strip 
 end
+
+When /^I follow '(.*)'$/ do |link|
+    click_link(link)
+end
