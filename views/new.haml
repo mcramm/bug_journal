@@ -2,9 +2,9 @@
     %form{:name => 'project', :action => "/project/save", :method => 'post'}
         .form-element.title
             %label Title
-            %input{:type => 'text', :name => "project[title]"}
+            %input{:id => 'title', :type => 'text', :name => "project[title]"}
         .form-element.description
             %label Description
-            %textarea{:name => "project[description]"}
+            %textarea{:id => 'description', :name => "project[description]"}
         .form-element.save
-            %input{:type => 'submit', :value => 'save'}
+            %input{:type => 'submit', :value => 'Save'}

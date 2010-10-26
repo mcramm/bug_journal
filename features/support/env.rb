@@ -2,20 +2,17 @@
 
 ENV['RACK_ENV'] = 'test'
 
-require File.join(File.dirname(__FILE__), '..', '..', 'app.rb')
+app_file = File.join(File.dirname(__FILE__), '..', '..', 'app.rb') 
+require app_file
+Sinatra::Application.app_file = app_file
 
-require 'capybara'
+begin require 'rspec/expectations'; rescue LoadError; require 'spec/expectations'; end
+
+require 'rack/test'
 require 'capybara/cucumber'
-require 'spec'
 
-Capybara.app = App
+Capybara.app = Sinatra::Application
 
-class AppWorld
-  include Capybara
-  include Spec::Expectations
-  include Spec::Matchers
-end
-
-World do
-  AppWorld.new
-end
+@db = CouchRest.database!("http://127.0.0.1:5984/bug-diary-test")
+@db.delete!
+@db.create!
