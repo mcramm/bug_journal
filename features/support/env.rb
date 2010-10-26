@@ -13,6 +13,5 @@ require 'capybara/cucumber'
 
 Capybara.app = Sinatra::Application
 
-@db = CouchRest.database!("http://127.0.0.1:5984/" << ENV['DB_NAME'])
-@db.delete!
-@db.create!
+db = CouchRest.database!("http://127.0.0.1:5984/" << ENV['DB_NAME'])
+db.recreate!
