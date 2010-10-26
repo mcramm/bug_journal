@@ -3,7 +3,7 @@
 !!! Strict
 %html{ :xmlns => "http://www.w3.org/1999/xhtml", :lang => 'en', 'xml:lang' => 'en' }
     %head
-        %title title
+        %title My Bug Journal
         %meta{'http-equiv'=>"Content-Type", :content=>"text/html; charset=iso-8859-1"}/
         %meta{'http-equiv'=>"Content-Language", :content=>"en-us"}/
         %link{:href=>"/stylesheets/screen.css", :media=>"screen", :rel=>"stylesheet", :type=>"text/css"}/
@@ -12,8 +12,8 @@
     %body
         .container
             .header
-                %h1 app_name
-                .footer
-                    %p &copy 2010 Michael Cramm
-        .body
-            =yield
+                %h1 My Bug Journal
+            .body
+                =yield
+            .footer
+                %p &copy 2010 Michael Cramm

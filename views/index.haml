@@ -1,0 +1,10 @@
+.index
+    %h2 Projects
+    .projects
+        - @projects.each do |project|
+            .project
+                %a{:href => "/project/#{project.id}"}
+                    =project.title
+    .new-project
+        %a{:href => '/project/new'}
+            New Project
