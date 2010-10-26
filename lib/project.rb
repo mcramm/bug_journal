@@ -12,7 +12,7 @@ class Project < CouchRest::ExtendedDocument
 
     timestamps!
 
-    validates_present :title
-    validates_present :nice_url
+    validates_presence_of :title
+    validates_presence_of :nice_url
 
 end
