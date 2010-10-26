@@ -32,19 +32,25 @@ get '/project/new' do
 end
 
 post '/project/save' do
-    params['project']['nice_url'] = CGI.escape(params['project']['title'].downcase)
+    params['project']['nice_url'] = escape(params['project']['title'].downcase)
     @project = Project.new( params['project'] )
     if @project.save
-        redirect "/project/#{@project.id}"
+        redirect "/project/#{@project.nice_url}"
     else
         halt 'Baa! bad save!'
     end
 end
 
-get '/project/:id' do
-    @project = Project.find( params[:id] )
+get '/project/:nice_url' do
+    nice_url = escape( params[:nice_url] )
+    @project = Project.by_nice_url(:key => nice_url ).first
+
     haml :project
 end
 
 
 private
+
+def escape(string)
+    CGI.escape string
+end

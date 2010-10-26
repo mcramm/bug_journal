@@ -3,7 +3,7 @@
     .projects
         - @projects.each do |project|
             .project
-                %a{:href => "/project/#{project.id}"}
+                %a{:href => "/project/#{project.nice_url}"}
                     =project.title
     .new-project
         %a{:href => '/project/new'}

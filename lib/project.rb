@@ -15,4 +15,6 @@ class Project < CouchRest::ExtendedDocument
     validates_presence_of :title
     validates_presence_of :nice_url
 
+    view_by :nice_url
+
 end
