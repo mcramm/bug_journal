@@ -7,13 +7,12 @@ set :root, File.dirname(__FILE__)
 set :views, "views"
 set :public, "static"
 
-
 configure do 
     Compass.add_project_configuration(File.join(Sinatra::Application.root, 'config', 'compass.config'))
 end
 
 before do
-    @db = CouchRest.database!("http://127.0.0.1:5984/bug-diary")
+    @db = CouchRest.database!("http://127.0.0.1:5984/" << ENV['DB_NAME'])
 end
 
 get '/stylesheets/:name.css' do

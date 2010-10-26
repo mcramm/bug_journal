@@ -2,12 +2,8 @@ require 'lib/issue'
 
 class Project < CouchRest::ExtendedDocument
     include CouchRest::Validation
-    if ENV['RACK_ENV'] == 'test'
-        db_name = 'bug-diary-test'
-    else
-        db_name = 'bug-diary'
-    end
-    use_database CouchRest.database!("http://127.0.0.1:5984/#{db_name}")
+
+    use_database CouchRest.database!("http://127.0.0.1:5984/" << ENV['DB_NAME'])
 
     property :title
     property :description
