@@ -28,7 +28,14 @@ end
 end
 
 get '/project/new' do
-    haml :new
+    @project = Project.new
+    haml :'project/new'
+end
+
+get '/project/:nice_url/edit' do |nice_url|
+    find_project nice_url
+
+    haml :'project/edit', :locals => { :project => @project }
 end
 
 post '/project/save' do
@@ -41,11 +48,32 @@ post '/project/save' do
     end
 end
 
-get '/project/:nice_url' do
-    nice_url = escape( params[:nice_url] )
-    @project = Project.by_nice_url(:key => nice_url ).first
+post '/project/:nice_url/update' do |nice_url|
+    find_project nice_url
 
-    haml :project
+    params['project']['nice_url'] = escape(params['project']['title'].downcase)
+    if @project.update_attributes( params['project'] )
+        redirect "/project/#{@project.nice_url}"
+    else
+        halt 'Baa! aaaa!'
+    end
+    
+end
+
+get '/project/:nice_url/delete' do |nice_url|
+    find_project nice_url
+    
+    if @project.destroy
+        redirect "/"
+    else
+        halt 'Cant delete'
+    end
+end
+
+get '/project/:nice_url' do |nice_url|
+    find_project nice_url
+
+    haml :'project/show'
 end
 
 
@@ -53,4 +81,9 @@ private
 
 def escape(string)
     CGI.escape string
+end
+
+def find_project(nice_url)
+    nice_url = escape( nice_url )
+    @project = Project.by_nice_url(:key => nice_url ).first
 end

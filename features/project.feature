@@ -23,3 +23,23 @@ Feature: Projects
         When I follow 'Pizza'
         Then I should see 'Pizza'
         And I should see 'Saucy'
+
+    Scenario: Edit Project
+        Given I have 1 project
+        And I am on the home page
+        When I follow 'Pizza'
+        And I follow 'Edit'
+        And I fill in 'Hamburger' for 'title'
+        And I fill in 'Cheesey' for 'description'
+        And I press 'Save'
+        Then I should see 'Hamburger'
+        And I should see 'Cheesey'
+        And I should have 1 project
+
+    Scenario: Delete Project
+        Given I have 1 project
+        And I am on the home page
+        When I follow 'Hamburger'
+        And I follow 'Delete'
+        Then I should be on the home page
+        And I should have 0 projects

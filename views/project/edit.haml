@@ -1,0 +1,3 @@
+.edit-project
+    %form{:name => 'project', :action => "/project/#{@project.nice_url}/update", :method => 'post'}
+        = haml :'project/project', :layout => false

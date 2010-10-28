@@ -18,3 +18,7 @@ end
 When /^I follow '(.*)'$/ do |link|
     click_link(link)
 end
+
+Then /^I should have (\d+) projects?$/ do |count|
+    Project.all.size.should == count.to_i
+end

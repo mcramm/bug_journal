@@ -1,0 +1,13 @@
+.project
+    %h2.title
+        = @project.title
+    .description
+        = @project.description
+
+.controls
+    .edit
+        %a{:href => "/project/#{@project.nice_url}/edit"}
+            Edit
+    .delete
+        %a{:href => "/project/#{@project.nice_url}/delete"}
+            Delete
