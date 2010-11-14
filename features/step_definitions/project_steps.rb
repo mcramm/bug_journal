@@ -3,6 +3,13 @@ Given /^I have (\d+) projects?$/ do |count|
     projects.size.should == count.to_i
 end
 
+Given /^I am logged in$/ do
+    visit path_to('the home page')
+    fill_in('username', :with => 'user')
+    fill_in('password', :with => 'test')
+    click_button('submit')
+end
+
 Given /^I fill in '(.*)' for '(.*)'$/ do |value, field|
     fill_in(field, :with => value)
 end

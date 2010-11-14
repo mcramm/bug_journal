@@ -1,11 +1,14 @@
 require 'rubygems'
 require 'sinatra'
 require 'environment'
+require 'digest/md5'
 
 set :app_file, __FILE__
 set :root, File.dirname(__FILE__)
 set :views, "views"
 set :public, "static"
+
+enable :sessions
 
 configure do 
     Compass.add_project_configuration(File.join(Sinatra::Application.root, 'config', 'compass.config'))
@@ -20,62 +23,66 @@ get '/stylesheets/:name.css' do
     sass(:"stylesheets/#{params[:name]}", Compass.sass_engine_options)
 end
 
+def verify_user
+    redirect '/login' if session[:user].nil?
+end
+
+
 %w(/ /projects).each do |path|
     get path do
+        verify_user
         @projects = Project.all
         haml :index
     end
 end
 
-get '/project/new' do
-    @project = Project.new
-    haml :'project/new'
+get '/login' do
+    haml :login
 end
 
-get '/project/:nice_url/edit' do |nice_url|
-    find_project nice_url
+post '/signin' do
+    username = params['user']['username'] 
+    password = params['user']['password']
+    password = Digest::MD5.hexdigest( password )
 
-    haml :'project/edit', :locals => { :project => @project }
-end
+    user = User.by_username(:key => username).first
 
-post '/project/save' do
-    params['project']['nice_url'] = escape(params['project']['title'].downcase)
-    @project = Project.new( params['project'] )
-    if @project.save
-        redirect "/project/#{@project.nice_url}"
-    else
-        halt 'Baa! bad save!'
-    end
-end
-
-post '/project/:nice_url/update' do |nice_url|
-    find_project nice_url
-
-    params['project']['nice_url'] = escape(params['project']['title'].downcase)
-    if @project.update_attributes( params['project'] )
-        redirect "/project/#{@project.nice_url}"
-    else
-        halt 'Baa! aaaa!'
-    end
+    invalid_user if user.nil?
+    invalid_password if user.password != password
     
+    session[:user] = user
+
+    redirect '/'
 end
 
-get '/project/:nice_url/delete' do |nice_url|
-    find_project nice_url
-    
-    if @project.destroy
-        redirect "/"
-    else
-        halt 'Cant delete'
-    end
+get '/register' do
+    @user = User.new
+
+    haml :register
 end
 
-get '/project/:nice_url' do |nice_url|
-    find_project nice_url
+post '/signup' do
+   params['user']['password'] = Digest::MD5.hexdigest( params['user']['password'] )
+   user = User.new( params['user'] )
 
-    haml :'project/show'
+   if user.save
+       session[:user] = user
+       redirect "/"
+   else
+       halt "bad user save"
+   end
 end
 
+get '/logout' do
+    verify_user
+    session[:user] = nil
+    redirect '/login'
+end
+
+
+after do
+    session[:message] = nil
+end
 
 private
 
@@ -87,3 +94,14 @@ def find_project(nice_url)
     nice_url = escape( nice_url )
     @project = Project.by_nice_url(:key => nice_url ).first
 end
+
+def invalid_user 
+#    session[:message] = "Invalid Username"
+    redirect '/login'
+end
+
+def invalid_password 
+#    session[:message] = "Invalid Password"
+    redirect '/login'
+end
+

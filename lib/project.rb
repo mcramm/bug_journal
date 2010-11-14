@@ -1,20 +1,56 @@
-require 'lib/issue'
+module ProjectRoutes
+    get '/project/new' do
+        verify_user
+        @project = Project.new
+        haml :'project/new'
+    end
 
-class Project < CouchRest::ExtendedDocument
-    include CouchRest::Validation
+    get '/project/:nice_url/edit' do |nice_url|
+        verify_user
+        find_project nice_url
 
-    use_database CouchRest.database!("http://127.0.0.1:5984/" << ENV['DB_NAME'])
+        haml :'project/edit', :locals => { :project => @project }
+    end
 
-    property :title
-    property :description
-    property :nice_url
-    property :issues,   [Issue]
+    post '/project/save' do
+        verify_user
+        params['project']['nice_url'] = escape(params['project']['title'].downcase)
+        @project = Project.new( params['project'] )
+        if @project.save
+            redirect "/project/#{@project.nice_url}"
+        else
+            halt 'Baa! bad save!'
+        end
+    end
 
-    timestamps!
+    post '/project/:nice_url/update' do |nice_url|
+        verify_user
+        find_project nice_url
 
-    validates_presence_of :title
-    validates_presence_of :nice_url
+        params['project']['nice_url'] = escape(params['project']['title'].downcase)
+        if @project.update_attributes( params['project'] )
+            redirect "/project/#{@project.nice_url}"
+        else
+            halt 'Baa! aaaa!'
+        end
+        
+    end
 
-    view_by :nice_url
+    get '/project/:nice_url/delete' do |nice_url|
+        verify_user
+        find_project nice_url
+        
+        if @project.destroy
+            redirect "/"
+        else
+            halt 'Cant delete'
+        end
+    end
 
+    get '/project/:nice_url' do |nice_url|
+        verify_user
+        find_project nice_url
+
+        haml :'project/show'
+    end
 end

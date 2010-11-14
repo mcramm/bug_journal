@@ -22,3 +22,5 @@ a { color: #7d90da; text-decoration: none; }
 a:visited { color: #7d90da; text-decoration: none; }
 
 a:hover { color: #b0c3ff; text-decoration: underline; }
+
+.message { background-color: red; color: white; font-size: 10px; padding: 5px 10px; }

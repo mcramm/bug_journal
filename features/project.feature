@@ -5,6 +5,8 @@ Feature: Projects
 
     Scenario: Add Project
         Given I have 0 projects
+        And I am logged in
+        And I am on the home page
         And I am on the new_project page
         And I fill in 'Pizza' for 'title'
         And I fill in 'Saucy' for 'description'
@@ -14,11 +16,13 @@ Feature: Projects
     
     Scenario: View Project List
         Given I have 1 project
+        And I am logged in
         When I am on the home page
         Then I should see 'Pizza'
 
     Scenario: View Project
         Given I have 1 project
+        And I am logged in
         And I am on the home page
         When I follow 'Pizza'
         Then I should see 'Pizza'
@@ -26,6 +30,7 @@ Feature: Projects
 
     Scenario: Edit Project
         Given I have 1 project
+        And I am logged in
         And I am on the home page
         When I follow 'Pizza'
         And I follow 'Edit'
@@ -38,6 +43,7 @@ Feature: Projects
 
     Scenario: Delete Project
         Given I have 1 project
+        And I am logged in
         And I am on the home page
         When I follow 'Hamburger'
         And I follow 'Delete'

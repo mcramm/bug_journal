@@ -1,4 +1,5 @@
 .index
+    = session[:message].inspect
     %h2 Projects
     .projects
         - @projects.each do |project|
