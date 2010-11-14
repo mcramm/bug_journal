@@ -6,6 +6,7 @@ require 'ostruct'
 require 'cgi'
 require 'lib/project'
 require 'lib/issue'
+require 'lib/user'
 
 ENV['RACK_ENV'] ||= 'production'
 ENV['DB_NAME'] = 'bug-journal-' << ENV['RACK_ENV']

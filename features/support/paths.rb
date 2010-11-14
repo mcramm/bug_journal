@@ -16,6 +16,10 @@ module NavigationHelpers
         '/project/new'
     when /the project page/
         '/project/:id'
+    when /the projects page/
+        '/'
+    when /the login page/
+        '/login'
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

@@ -23,65 +23,18 @@ get '/stylesheets/:name.css' do
     sass(:"stylesheets/#{params[:name]}", Compass.sass_engine_options)
 end
 
-def verify_user
-    redirect '/login' if session[:user].nil?
+get '/' do
+    verify_user
+    @projects = Project.all
+    haml :index
 end
 
-
-%w(/ /projects).each do |path|
-    get path do
-        verify_user
-        @projects = Project.all
-        haml :index
-    end
-end
-
-get '/login' do
-    haml :login
-end
-
-post '/signin' do
-    username = params['user']['username'] 
-    password = params['user']['password']
-    password = Digest::MD5.hexdigest( password )
-
-    user = User.by_username(:key => username).first
-
-    invalid_user if user.nil?
-    invalid_password if user.password != password
-    
-    session[:user] = user
-
+get '/projects' do
     redirect '/'
 end
 
-get '/register' do
-    @user = User.new
-
-    haml :register
-end
-
-post '/signup' do
-   params['user']['password'] = Digest::MD5.hexdigest( params['user']['password'] )
-   user = User.new( params['user'] )
-
-   if user.save
-       session[:user] = user
-       redirect "/"
-   else
-       halt "bad user save"
-   end
-end
-
-get '/logout' do
-    verify_user
-    session[:user] = nil
-    redirect '/login'
-end
-
-
-after do
-    session[:message] = nil
+def verify_user
+    redirect '/login' if session[:user].nil?
 end
 
 private
