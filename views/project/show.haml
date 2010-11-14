@@ -4,6 +4,14 @@
     .description
         = @project.description
 
+.issues
+    .add-issue
+        %a{:href => "/project/#{@project.nice_url}/issue/new"}
+            Add Issue
+    - @project.issues.each do |issue|
+        .issue
+            %a{:href => "/project/#{@project.nice_url}/issue/#{@project.issues.index(issue)}", :class => 'title'}
+                =issue.title
 .controls
     .edit
         %a{:href => "/project/#{@project.nice_url}/edit"}

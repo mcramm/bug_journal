@@ -48,6 +48,11 @@ def find_project(nice_url)
     @project = Project.by_nice_url(:key => nice_url ).first
 end
 
+def find_issue(project_url, issue_id)
+    find_project project_url
+    @issue = @project.issues[issue_id.to_i]
+end
+
 def invalid_user 
 #    session[:message] = "Invalid Username"
     redirect '/login'

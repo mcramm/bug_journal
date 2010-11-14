@@ -1,0 +1,12 @@
+.issue
+    %h2.title
+        = @issue.title
+    .description
+        = @issue.description
+.controls
+    .edit
+        %a{:href => "/project/#{@project.nice_url}/issue/#{@project.issues.index(@issue)}/edit"}
+            Edit
+    .delete
+        %a{:href => "/project/#{@project.nice_url}/issue/#{@project.issues.index(@issue)}/delete"}
+            Delete

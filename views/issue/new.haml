@@ -1,2 +1,3 @@
-.new-issue
-
+.new-project
+    %form{:name => 'issue', :action => "/project/#{@project_url}/issue/save", :method => 'post'}
+        = haml :'issue/issue', :layout => false
