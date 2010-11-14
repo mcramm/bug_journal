@@ -5,5 +5,16 @@
     %label Description
     %textarea{:id => 'description', :name => "issue[description]"}
         =@issue.description
+.form-element.status
+    %label Status
+    %select{:id => 'status', :name => "issue[status]"}
+        - %w(Open Closed).each do |status|
+            - if @issue.status == status
+                %option{:value => "#{status}", :selected => 'yes'}
+                    =status
+            - else
+                %option{:value => "#{status}"}
+                    =status
+
 .form-element.save
     %input{:type => 'submit', :value => 'Save'}

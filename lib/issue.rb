@@ -9,7 +9,6 @@ module IssueRoutes
 
     post '/project/:project_url/issue/save' do |project_url|
         verify_user
-        params['issue']['nice_url'] = escape(params['issue']['title'].downcase)
 
         @project = find_project project_url
         @issue = Issue.new( params['issue'] )

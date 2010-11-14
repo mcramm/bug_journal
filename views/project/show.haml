@@ -9,7 +9,7 @@
         %a{:href => "/project/#{@project.nice_url}/issue/new"}
             Add Issue
     - @project.issues.each do |issue|
-        .issue
+        .issue{:class => "#{issue.status.downcase}"}
             %a{:href => "/project/#{@project.nice_url}/issue/#{@project.issues.index(issue)}", :class => 'title'}
                 =issue.title
 .controls
