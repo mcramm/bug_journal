@@ -1,3 +1,4 @@
-.new-project
+%h2 Edit Issue
+.new-issue
     %form{:name => 'issue', :action => "/project/#{@project_url}/issue/save", :method => 'post'}
         = haml :'issue/issue', :layout => false

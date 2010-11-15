@@ -13,14 +13,45 @@ q:before, q:after, blockquote:before, blockquote:after { content: ""; }
 
 a img { border: none; }
 
-body { font-size: 1.5em; font-family: Monaco, "Helvetica Neue", Helvetica; color: black; background: white; }
+body { font-size: 1.5em; font-family: Monaco, "Helvetica Neue", Helvetica; color: black; background: white; padding: 20px; }
 
-h1 { font-size: 4em; }
+h1 { font-size: 1.5em; text-align: center; }
 
-a { color: #7d90da; text-decoration: none; }
+a { color: black; text-decoration: none; }
 
-a:visited { color: #7d90da; text-decoration: none; }
+a:visited { color: black; text-decoration: none; }
 
-a:hover { color: #b0c3ff; text-decoration: underline; }
+a:hover { color: #333333; text-decoration: underline; }
+
+h2 { text-align: center; font-size: 0.9em; padding-top: 20px; }
+
+.index { padding: 20px; text-align: center; }
+.index .projects { padding: 15px; font-size: 0.7em; }
+.index .projects .new-project { padding-bottom: 5px; }
+
+form { padding: 20px; text-align: center; }
+form .form-element { height: 50px; }
+form .form-element label { display: inline-block; width: 200px; }
+form .title input { font-size: 22px; }
+form .description textarea { font-size: 17px; }
+form .status { margin-top: 195px; }
+form .save { display: block; margin-top: 195px; }
+form .save input { width: 50px; font-size: 15px; }
+form .save-issue { margin-top: 0px; }
+
+.project .description { padding-top: 15px; font-size: 13px; color: #555555; text-align: center; }
+
+.controls { text-align: center; font-size: 12px; margin-top: 10px; }
+.controls div { text-align: center; display: inline-block; }
+.controls .edit { border-right: 1px solid #cccccc; padding-right: 5px; }
+
+.issues { display: block; margin: 15px auto; width: 500px; }
+.issues .add-issue { font-size: 15px; padding: 3px 0px; }
+.issues .issue a { display: inline-block; font-size: 13px; padding: 7px 10px; }
+.issues hr { width: 300px; }
+.issues .open a { background-color: red; color: #f4f4f4; }
+.issues .closed a { background-color: yellow; color: #222222; }
 
 .message { background-color: red; color: white; font-size: 10px; padding: 5px 10px; }
+
+.footer { position: fixed; bottom: 0px; width: 100%; text-align: center; font-size: 13px; padding-bottom: 10px; }

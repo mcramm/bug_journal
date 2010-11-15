@@ -12,7 +12,9 @@
     %body
         .container
             .header
-                %h1 My Bug Journal
+                %h1 
+                    %a{:href => '/'}
+                        My Bug Journal
             .body
                 - unless session[:message].nil?
                     .message

@@ -1,11 +1,10 @@
 .index
-    = session[:message].inspect
     %h2 Projects
     .projects
+        .new-project
+            %a{:href => '/project/new'}
+                New Project
         - @projects.each do |project|
             .project
                 %a{:href => "/project/#{project.nice_url}"}
                     =project.title
-    .new-project
-        %a{:href => '/project/new'}
-            New Project

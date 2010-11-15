@@ -3,7 +3,8 @@
     %input{:id => 'title', :type => 'text', :name => "issue[title]", :value => "#{@issue.title}"}
 .form-element.description
     %label Description
-    %textarea{:id => 'description', :name => "issue[description]"}
+    %br
+    %textarea{:id => 'description', :name => "issue[description]", :rows => 10, :cols => 44}
         =@issue.description
 .form-element.status
     %label Status
@@ -16,5 +17,5 @@
                 %option{:value => "#{status}"}
                     =status
 
-.form-element.save
+.form-element.save.save-issue
     %input{:type => 'submit', :value => 'Save'}

@@ -4,6 +4,13 @@
     .description
         = @project.description
 
+.controls
+    .edit
+        %a{:href => "/project/#{@project.nice_url}/edit"}
+            Edit
+    .delete
+        %a{:href => "/project/#{@project.nice_url}/delete"}
+            Delete
 .issues
     .add-issue
         %a{:href => "/project/#{@project.nice_url}/issue/new"}
@@ -12,10 +19,4 @@
         .issue{:class => "#{issue.status.downcase}"}
             %a{:href => "/project/#{@project.nice_url}/issue/#{@project.issues.index(issue)}", :class => 'title'}
                 =issue.title
-.controls
-    .edit
-        %a{:href => "/project/#{@project.nice_url}/edit"}
-            Edit
-    .delete
-        %a{:href => "/project/#{@project.nice_url}/delete"}
-            Delete
+        %hr
