@@ -22,8 +22,7 @@ module IssueRoutes
     get '/project/:project_url/issue/:issue_url' do |project_url, issue_url|
         verify_user
         @issue = find_issue project_url, issue_url
-        @comments = Comment.by_issue_id(:key => "#{project_url}-#{issue_url}")
-
+        find_comment project_url, issue_url
         haml :'issue/show'
     end
 
@@ -48,6 +47,8 @@ module IssueRoutes
         verify_user
         find_issue project_url, issue_url
 
+        destroy_comments(project_url, issue_url)
+
         @project.issues.slice!(issue_url.to_i)
         @project.save
 
@@ -55,6 +56,7 @@ module IssueRoutes
     end
 
     post '/project/:project_url/issue/:issue_url/create_comment' do |project_url, issue_url|
+        verify_user
         comment = Comment.new( params[:comment] )
         comment.issue_id = "#{project_url}-#{issue_url}"
         comment.body = comment.body.gsub( /\r\n/m, "<br />" )

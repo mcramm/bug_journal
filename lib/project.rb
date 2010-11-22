@@ -39,6 +39,9 @@ module ProjectRoutes
     get '/project/:nice_url/delete' do |nice_url|
         verify_user
         find_project nice_url
+        @project.issues.each do |issue|
+            destroy_comments(nice_url, @project.issues.index(issue))
+        end
         
         if @project.destroy
             redirect "/"

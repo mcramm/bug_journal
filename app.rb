@@ -53,6 +53,18 @@ def find_issue(project_url, issue_id)
     @issue = @project.issues[issue_id.to_i]
 end
 
+def find_comment(project_url, issue_id)
+    @comments = Comment.by_issue_id(:key => "#{project_url}-#{issue_id}")
+end
+
+def destroy_comments(project_url, issue_id)
+    find_comment(project_url, issue_id)
+
+    @comments.each do |comment|
+        comment.destroy
+    end
+end
+
 def invalid_user 
 #    session[:message] = "Invalid Username"
     redirect '/login'
