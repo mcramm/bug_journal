@@ -15,10 +15,13 @@
         .comment
             .body
                 = comment.body
-            .created_at
+            .created-at
                 = comment.created_at.strftime( "%d/%m/%Y %H:%M" )
                 
 .controls
+    .back-to-project
+        %a{:href => "/project/#{@project.nice_url}"}
+            Back to Project
     .edit
         %a{:href => "/project/#{@project.nice_url}/issue/#{@project.issues.index(@issue)}/edit"}
             Edit

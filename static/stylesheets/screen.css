@@ -45,7 +45,7 @@ form .save-issue { margin-top: 0px; }
 
 .controls { text-align: center; font-size: 12px; margin-top: 10px; }
 .controls div { text-align: center; display: inline-block; }
-.controls .edit { border-right: 1px solid #cccccc; padding-right: 5px; }
+.controls .edit, .controls .back-to-project { border-right: 1px solid #cccccc; padding-right: 5px; }
 
 .issues { display: block; margin: 15px auto; width: 500px; }
 .issues .add-issue { font-size: 15px; padding: 3px 0px; }
@@ -60,7 +60,7 @@ form .save-issue { margin-top: 0px; }
 .comments .add-comment form { background-color: #dfdfdf; }
 .comments .add-comment .save { height: auto; float: right; margin-top: 40px; }
 .comments .comment { margin: 10px 0px; font-size: 13px; background-color: #f0f0f0; padding: 5px; }
-.comments .comment .created_at { font-size: 11px; margin-top: 10px; text-align: right; color: #555555; }
+.comments .comment .created-at { font-size: 11px; margin-top: 10px; text-align: right; color: #555555; }
 
 .message { background-color: red; color: white; font-size: 10px; padding: 5px 10px; }
 
