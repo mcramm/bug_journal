@@ -13,3 +13,4 @@ ENV['DB_NAME'] = 'bug-journal-' << ENV['RACK_ENV']
 
 require 'model/project'
 require 'model/user'
+require 'model/comment'

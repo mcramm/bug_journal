@@ -22,6 +22,7 @@ module IssueRoutes
     get '/project/:project_url/issue/:issue_url' do |project_url, issue_url|
         verify_user
         @issue = find_issue project_url, issue_url
+        @comments = Comment.by_issue_id(:key => issue_url.to_i) 
 
         haml :'issue/show'
     end
@@ -53,8 +54,13 @@ module IssueRoutes
         redirect "/project/#{project_url}"
     end
 
+    post '/project/:project_url/issue/:issue_url/create_comment' do |project_url, issue_url|
+        comment = Comment.new( params[:comment] )
+        comment.issue_id = issue_url.to_i
+        comment.body = comment.body.gsub( /\r\n/m, "<br />" )
 
-
-    
+        comment.save
+        redirect "/project/#{project_url}/issue/#{issue_url}"
+    end
 end
 
