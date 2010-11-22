@@ -25,6 +25,8 @@ a:hover { color: #333333; text-decoration: underline; }
 
 h2 { text-align: center; font-size: 0.9em; padding-top: 20px; }
 
+.clear { clear: both; }
+
 .index { padding: 20px; text-align: center; }
 .index .projects { padding: 15px; font-size: 0.7em; }
 .index .projects .new-project { padding-bottom: 5px; }
@@ -52,6 +54,14 @@ form .save-issue { margin-top: 0px; }
 .issues .open a { background-color: red; color: #f4f4f4; }
 .issues .closed a { background-color: yellow; color: #222222; }
 
+.issue .description { width: 450px; margin: 15px auto; font-size: 15px; }
+
+.comments { margin: 0px auto; width: 450px; }
+.comments .add-comment form { background-color: #dfdfdf; }
+.comments .add-comment .save { height: auto; float: right; margin-top: 40px; }
+.comments .comment { margin: 10px 0px; font-size: 13px; background-color: #f0f0f0; padding: 5px; }
+.comments .comment .created_at { font-size: 11px; margin-top: 10px; text-align: right; color: #555555; }
+
 .message { background-color: red; color: white; font-size: 10px; padding: 5px 10px; }
 
-.footer { position: fixed; bottom: 0px; width: 100%; text-align: center; font-size: 13px; padding-bottom: 10px; }
+.footer { margin-top: 25px; width: 100%; text-align: center; font-size: 13px; padding-bottom: 10px; }

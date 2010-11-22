@@ -7,15 +7,16 @@
     .add-comment
         %form{:name => 'comment', :action => "/project/#{@project.nice_url}/issue/#{@project.issues.index(@issue)}/create_comment", :method => 'post'}
             .form-element.body
-                %textarea{:id => 'body', :type => 'text', :name => "comment[body]", :rows => 8, :cols => 60}
+                %textarea{:id => 'body', :type => 'text', :name => "comment[body]", :rows => 6, :cols => 55}
             .form-element.save
                 %input{:type => 'submit', :value => 'Save'}
+            .clear
     - @comments.each do |comment|
         .comment
             .body
                 = comment.body
             .created_at
-                = comment.created_at
+                = comment.created_at.strftime( "%d/%m/%Y %H:%M" )
                 
 .controls
     .edit
