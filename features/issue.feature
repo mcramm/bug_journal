@@ -1,6 +1,6 @@
 Feature: Issues
     In order for a project to have issues
-    As a suser
+    As a user
     I want to be able to add/edit and delete issues
 
         Scenario: Add Issue
