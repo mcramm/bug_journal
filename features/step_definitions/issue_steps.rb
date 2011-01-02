@@ -3,7 +3,7 @@ Given /^I have (\d+) issues?$/ do |count|
 end
 
 Given /^I have a project named '(.*)'$/ do |title|
-    Project.create!({:title => title, :description => 'Saucy', :status => 'open'})
+    Project.create!({:title => title, :description => 'Saucy', :status => 'open', :nice_url => escape(title.downcase)})
 end
 
 Then /^I should have (\d+) issues?$/ do |count|
