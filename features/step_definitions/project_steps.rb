@@ -15,13 +15,6 @@ Given /^I have a project named '([^\']*)'$/ do |title|
     createProject title, 'Some description'
 end
 
-Given /^I am logged in$/ do
-    visit path_to('the home page')
-    fill_in('username', :with => 'user')
-    fill_in('password', :with => 'test')
-    click_button('submit')
-end
-
 Given /^I fill in '(.*)' for '(.*)'$/ do |value, field|
     fill_in(field, :with => value)
 end

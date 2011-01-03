@@ -6,3 +6,16 @@ Given /^the following user record$/ do |table|
       User.create(user)
   end
 end
+
+Given /^I am logged in$/ do
+    visit path_to('the home page')
+    fill_in('username', :with => 'user')
+    fill_in('password', :with => 'test')
+    click_button('submit')
+end
+
+Given /^I am viewing the user home page$/ do
+    Given "I am logged in"
+    Given "I am on the home page"
+end
+

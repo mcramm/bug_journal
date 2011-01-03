@@ -6,8 +6,7 @@ Feature: Issues
         Scenario: Add Issue
             Given I have a project named 'Pizza'
             And I have 0 issues
-            And I am logged in
-            And I am on the home page
+            And I am viewing the user home page
             And I follow 'Pizza'
             When I follow 'Add Issue'
             And I fill in 'Pepperoni' for 'title'
@@ -18,8 +17,7 @@ Feature: Issues
 
         Scenario: View Issue
             Given I have a project, 'Pizza', with an issue, 'Pepperoni'
-            And I am logged in
-            And I am on the home page
+            And I am viewing the user home page
             And I follow 'Pizza'
             When I follow 'Pepperoni'
             Then I should see 'Pepperoni'
@@ -27,8 +25,7 @@ Feature: Issues
 
         Scenario: Edit Issue
             Given I have a project, 'Pizza', with an issue, 'Pepperoni'
-            And I am logged in
-            And I am on the home page
+            And I am viewing the user home page
             And I follow 'Pizza'
             And I follow 'Pepperoni'
             When I follow 'Edit'
@@ -40,8 +37,7 @@ Feature: Issues
 
         Scenario: Delete Issue
             Given I have a project, 'Pizza', with an issue, 'Pepperoni'
-            And I am logged in
-            And I am on the home page
+            And I am viewing the user home page
             And I follow 'Pizza'
             And I follow 'Pepperoni'
             When I follow 'Delete'
