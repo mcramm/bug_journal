@@ -21,7 +21,7 @@ Feature: Projects
         Then I should see 'Pizza'
 
     Scenario: View Project
-        Given I have a project named 'Pizza'
+        Given I have a project named 'Pizza' described as 'Saucy'
         And I am logged in
         And I am on the home page
         When I follow 'Pizza'

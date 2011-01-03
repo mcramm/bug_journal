@@ -1,6 +1,18 @@
+def createProject title, description
+    Project.create!({:title => title, :description => description, :status => 'open', :nice_url => escape(title.downcase)})
+end
+
 Given /^I have (\d+) projects?$/ do |count|
     projects = Project.all
     projects.size.should == count.to_i
+end
+
+Given /^I have a project named '([^\']*)' described as '([^\']*)'$/ do |title, description|
+    createProject title, description
+end
+
+Given /^I have a project named '([^\']*)'$/ do |title|
+    createProject title, 'Some description'
 end
 
 Given /^I am logged in$/ do
