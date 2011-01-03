@@ -17,8 +17,7 @@ Feature: Issues
             And I should have 1 issue
 
         Scenario: View Issue
-            Given: I have 1 project
-            And I have 1 issue
+            Given I have a project, 'Pizza', with an issue, 'Pepperoni'
             And I am logged in
             And I am on the home page
             And I follow 'Pizza'
@@ -27,8 +26,7 @@ Feature: Issues
             And I should see 'Not Enough!'
 
         Scenario: Edit Issue
-            Given: I have 1 project
-            And I have 1 issue
+            Given I have a project, 'Pizza', with an issue, 'Pepperoni'
             And I am logged in
             And I am on the home page
             And I follow 'Pizza'
@@ -41,12 +39,11 @@ Feature: Issues
             And I should have 1 issue
 
         Scenario: Delete Issue
-            Given: I have 1 project
-            And I have 1 issue
+            Given I have a project, 'Pizza', with an issue, 'Pepperoni'
             And I am logged in
             And I am on the home page
             And I follow 'Pizza'
-            And I follow 'Crust'
+            And I follow 'Pepperoni'
             When I follow 'Delete'
-            Then I should not see 'Crust'
+            Then I should not see 'Pepperoni'
             And I have 0 issues

@@ -15,13 +15,13 @@ Feature: Projects
         And I should see 'Saucy'
     
     Scenario: View Project List
-        Given I have 1 project
+        Given I have a project named 'Pizza'
         And I am logged in
         When I am on the home page
         Then I should see 'Pizza'
 
     Scenario: View Project
-        Given I have 1 project
+        Given I have a project named 'Pizza'
         And I am logged in
         And I am on the home page
         When I follow 'Pizza'
@@ -29,7 +29,7 @@ Feature: Projects
         And I should see 'Saucy'
 
     Scenario: Edit Project
-        Given I have 1 project
+        Given I have a project named 'Pizza'
         And I am logged in
         And I am on the home page
         When I follow 'Pizza'
@@ -42,10 +42,10 @@ Feature: Projects
         And I should have 1 project
 
     Scenario: Delete Project
-        Given I have 1 project
+        Given I have a project named 'Pizza'
         And I am logged in
         And I am on the home page
-        When I follow 'Hamburger'
+        When I follow 'Pizza'
         And I follow 'Delete'
         Then I should be on the home page
         And I should have 0 projects
