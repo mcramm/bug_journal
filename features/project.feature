@@ -20,15 +20,13 @@ Feature: Projects
 
     Scenario: View Project
         Given I have a project named 'Pizza' described as 'Saucy'
-        And I am viewing the user home page
-        When I follow 'Pizza'
+        And I am viewing the 'Pizza' project page
         Then I should see 'Pizza'
         And I should see 'Saucy'
 
     Scenario: Edit Project
         Given I have a project named 'Pizza'
-        And I am viewing the user home page
-        When I follow 'Pizza'
+        And I am viewing the 'Pizza' project page
         And I follow 'Edit'
         And I fill in 'Hamburger' for 'title'
         And I fill in 'Cheesey' for 'description'
@@ -39,8 +37,7 @@ Feature: Projects
 
     Scenario: Delete Project
         Given I have a project named 'Pizza'
-        And I am viewing the user home page
-        When I follow 'Pizza'
+        And I am viewing the 'Pizza' project page
         And I follow 'Delete'
         Then I should be on the home page
         And I should have 0 projects

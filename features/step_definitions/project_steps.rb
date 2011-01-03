@@ -34,3 +34,8 @@ end
 Then /^I should have (\d+) projects?$/ do |count|
     Project.all.size.should == count.to_i
 end
+
+Given /^I am viewing the '([^\']*)' project page$/ do |project_title|
+    Given "I am viewing the user home page"
+    Given "I follow '#{project_title}'"
+end
