@@ -21,3 +21,8 @@ end
 Then /^I should not see '(.*)'$/ do |text|
     body.should_not match text.strip
 end
+
+Given /^I am viewing the '([^\']*)'=>'([^\']*)' issue page$/ do |project_title, issue_title|
+    Given "I am viewing the '#{project_title}' project page"
+    Given "I follow '#{issue_title}'"
+end

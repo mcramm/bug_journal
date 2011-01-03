@@ -6,8 +6,7 @@ Feature: Issues
         Scenario: Add Issue
             Given I have a project named 'Pizza'
             And I have 0 issues
-            And I am viewing the user home page
-            And I follow 'Pizza'
+            And I am viewing the 'Pizza' project page
             When I follow 'Add Issue'
             And I fill in 'Pepperoni' for 'title'
             And I fill in 'Not Enough!' for 'description'
@@ -17,17 +16,13 @@ Feature: Issues
 
         Scenario: View Issue
             Given I have a project, 'Pizza', with an issue, 'Pepperoni'
-            And I am viewing the user home page
-            And I follow 'Pizza'
-            When I follow 'Pepperoni'
+            When I am viewing the 'Pizza'=>'Pepperoni' issue page
             Then I should see 'Pepperoni'
             And I should see 'Not Enough!'
 
         Scenario: Edit Issue
             Given I have a project, 'Pizza', with an issue, 'Pepperoni'
-            And I am viewing the user home page
-            And I follow 'Pizza'
-            And I follow 'Pepperoni'
+            And I am viewing the 'Pizza'=>'Pepperoni' issue page
             When I follow 'Edit'
             And I fill in 'Crust' for 'title'
             And I fill in 'Too Cheesey!' for 'description'
@@ -37,9 +32,7 @@ Feature: Issues
 
         Scenario: Delete Issue
             Given I have a project, 'Pizza', with an issue, 'Pepperoni'
-            And I am viewing the user home page
-            And I follow 'Pizza'
-            And I follow 'Pepperoni'
+            And I am viewing the 'Pizza'=>'Pepperoni' issue page
             When I follow 'Delete'
             Then I should not see 'Pepperoni'
             And I have 0 issues
