@@ -16,53 +16,54 @@ module IssueRoutes
 
         @project.save
     
-        redirect "/project/#{project_url}"
+        redirect project_url @project
     end
 
-    get '/project/:project_url/issue/:issue_url' do |project_url, issue_url|
+    get '/project/:project_url/issue/:issue_index' do |project_url, issue_index|
         verify_user
-        @issue = find_issue project_url, issue_url
-        find_comment project_url, issue_url
+        @issue = find_issue project_url, issue_index
+        find_comment project_url, issue_index
         haml :'issue/show'
     end
 
-    get '/project/:project_url/issue/:issue_url/edit' do |project_url, issue_url|
+    get '/project/:project_url/issue/:issue_index/edit' do |project_url, issue_index|
         verify_user
-        find_issue project_url, issue_url
+        find_issue project_url, issue_index
 
         haml :'issue/edit', :locals => { :issue => @issue }
     end
 
-    post '/project/:project_url/issue/:issue_url/update' do |project_url, issue_url|
+    post '/project/:project_url/issue/:issue_index/update' do |project_url, issue_index|
         verify_user
         find_project project_url
 
-        @project.issues[issue_url.to_i] = params['issue']
+        @project.issues[issue_index.to_i] = params['issue']
         @project.save
 
-        redirect "/project/#{project_url}/issue/#{issue_url}"
+        redirect issue_url(@project, issue_index)
     end
 
-    get '/project/:project_url/issue/:issue_url/delete' do |project_url, issue_url|
+    get '/project/:project_url/issue/:issue_index/delete' do |project_url, issue_index|
         verify_user
-        find_issue project_url, issue_url
+        find_issue project_url, issue_index
 
-        destroy_comments(project_url, issue_url)
+        destroy_comments(project_url, issue_index)
 
-        @project.issues.slice!(issue_url.to_i)
+        @project.issues.slice!(issue_index.to_i)
         @project.save
 
-        redirect "/project/#{project_url}"
+        redirect project_url(@project)
     end
 
-    post '/project/:project_url/issue/:issue_url/create_comment' do |project_url, issue_url|
+    post '/project/:project_url/issue/:issue_index/create_comment' do |project_url, issue_index|
         verify_user
         comment = Comment.new( params[:comment] )
-        comment.issue_id = "#{project_url}-#{issue_url}"
+        comment.issue_id = "#{project_url}-#{issue_index}"
         comment.body = comment.body.gsub( /\r\n/m, "<br />" )
 
         comment.save
-        redirect "/project/#{project_url}/issue/#{issue_url}"
+
+        redirect issue_url( find_project(project_url), issue_index)
     end
 end
 

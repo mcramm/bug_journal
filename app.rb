@@ -48,6 +48,15 @@ def find_project(nice_url)
     @project = Project.by_nice_url(:key => nice_url ).first
 end
 
+def project_url(project)
+    "/project/#{project.nice_url}"
+end
+
+def issue_url(project, issue_index)
+    project_url(@project) + "/issue/#{issue_index}"
+end
+
+
 def find_issue(project_url, issue_id)
     find_project project_url
     @issue = @project.issues[issue_id.to_i]

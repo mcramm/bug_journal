@@ -14,7 +14,9 @@ require 'capybara/cucumber'
 Capybara.app = Sinatra::Application
 
 db = CouchRest.database!("http://127.0.0.1:5984/" << ENV['DB_NAME'])
-db.recreate!
 
-user = User.new({:username => 'user', :password => Digest::MD5.hexdigest('test'), :email => 'someone@whatever.com'})
-user.save
+Before do
+    db.recreate!
+    user = User.new({:username => 'user', :password => Digest::MD5.hexdigest('test'), :email => 'someone@whatever.com'})
+    user.save
+end
